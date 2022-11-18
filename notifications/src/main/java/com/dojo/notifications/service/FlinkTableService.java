@@ -26,6 +26,7 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -241,7 +242,7 @@ public class FlinkTableService {
     private File getFlinkTablesFile() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("static/flink-tables.json");
-        File flinkTablesFile = File.createTempFile("flink-tables", ".json");
+        File flinkTablesFile = Files.createTempFile("flink-tables", ".json").toFile();
         try {
             FileUtils.copyInputStreamToFile(inputStream, flinkTablesFile);
         } finally {
